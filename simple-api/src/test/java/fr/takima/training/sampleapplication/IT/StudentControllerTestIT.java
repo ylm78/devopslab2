@@ -1,6 +1,6 @@
 package fr.takima.training.sampleapplication.IT;
 
-import fr.takima.training.simpleapi.SimpleApiApplication;
+import fr.takima.training.simpleapi.SimpleapiApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,14 +14,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
-@SpringBootTest(classes = {SimpleApiApplication.class})
+@SpringBootTest(classes = { SimpleapiApplication.class })
 class StudentControllerTestIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    @Sql({"/InsertData.sql"})
+    @Sql({ "/InsertData.sql" })
     void testGetStudentById() throws Exception {
         mockMvc.perform(get("/students/6"))
                 .andExpect(status().isOk())
@@ -33,14 +33,14 @@ class StudentControllerTestIT {
     }
 
     @Test
-    @Sql({"/InsertData.sql"})
+    @Sql({ "/InsertData.sql" })
     void testGetNonExistingStudentById() throws Exception {
         mockMvc.perform(get("/students/666"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    @Sql({"/InsertData.sql"})
+    @Sql({ "/InsertData.sql" })
     void testPostStudent() throws Exception {
         String body = """
                 {
@@ -53,14 +53,14 @@ class StudentControllerTestIT {
                 }
                 """;
         mockMvc.perform(post("/students")
-                        .content(body)
-                        .contentType(MediaType.APPLICATION_JSON))
+                .content(body)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("location"));
     }
 
     @Test
-    @Sql({"/InsertData.sql"})
+    @Sql({ "/InsertData.sql" })
     void testPostStudentWithoutLastName() throws Exception {
         String body = """
                 {
@@ -72,13 +72,13 @@ class StudentControllerTestIT {
                 }
                 """;
         mockMvc.perform(post("/students")
-                        .content(body)
-                        .contentType(MediaType.APPLICATION_JSON))
+                .content(body)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    @Sql({"/InsertData.sql"})
+    @Sql({ "/InsertData.sql" })
     void testPostStudentWithoutDepartment() throws Exception {
         String body = """
                 {
@@ -87,13 +87,13 @@ class StudentControllerTestIT {
                 }
                 """;
         mockMvc.perform(post("/students")
-                        .content(body)
-                        .contentType(MediaType.APPLICATION_JSON))
+                .content(body)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    @Sql({"/InsertData.sql"})
+    @Sql({ "/InsertData.sql" })
     void testUpdateStudent() throws Exception {
         mockMvc.perform(get("/students/11"))
                 .andExpect(jsonPath("id", equalTo(11)))
@@ -113,8 +113,8 @@ class StudentControllerTestIT {
                 }
                 """;
         mockMvc.perform(put("/students/11")
-                        .content(body)
-                        .contentType(MediaType.APPLICATION_JSON))
+                .content(body)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id", equalTo(11)))
                 .andExpect(jsonPath("firstname", equalTo("Francis")))
@@ -124,7 +124,7 @@ class StudentControllerTestIT {
     }
 
     @Test
-    @Sql({"/InsertData.sql"})
+    @Sql({ "/InsertData.sql" })
     void testDeleteStudent() throws Exception {
         mockMvc.perform(get("/students/1"))
                 .andExpect(jsonPath("id", equalTo(1)));
