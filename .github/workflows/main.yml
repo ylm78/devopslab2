@@ -27,8 +27,8 @@ jobs:
         working-directory: simple-api
         run: |
           mvn -B verify sonar:sonar \
-            -Dsonar.projectKey=yilmaz-devopslab2_simple-api \
-            -Dsonar.organization=yilmaz-devopslab2 \
+            -Dsonar.projectKey=yilmaz-devops_simple-api \
+            -Dsonar.organization=yilmaz-devops \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
