@@ -24,9 +24,13 @@ jobs:
         run: mvn clean verify --file simple-api/pom.xml
 
       - name: SonarCloud Scan
-        working-directory: simple-api
-        run: |
-          mvn -B verify sonar:sonar -Dsonar.projectKey=yilmaz-devops_simple-api -Dsonar.organization=yilmaz-devops -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run:
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.projectKey=ylm78_devopslab2 \
+          -Dsonar.organization=ylm78 \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          --file simple-api/pom.xml
 
   build-and-push-docker-image:
     needs: test-backend
