@@ -24,6 +24,7 @@ jobs:
         run: mvn clean verify --file simple-api/pom.xml
 
       - name: SonarCloud Scan
+        working-directory: simple-api
         run:
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.projectKey=ylm78_devopslab2 \
