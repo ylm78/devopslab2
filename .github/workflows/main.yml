@@ -24,7 +24,7 @@ jobs:
 
   build-and-push-docker-image:
     needs: test-backend # ❗ Nécessaire pour s'assurer que les tests sont OK avant de builder
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
